@@ -1,0 +1,50 @@
+# Gitpod configuration for Pool App
+# https://www.gitpod.io/docs/config-gitpod-file
+
+# Tasks to execute on start
+tasks:
+  - name: Setup
+    init: |
+      chmod +x .gitpod/tasks.sh
+      sudo .gitpod/tasks.sh
+      go mod download
+      cd frontend && npm install --legacy-peer-deps
+    command: |
+      clear
+      echo "Welcome to Pool App development!"
+      echo "-----------------------------------"
+      echo "Available commands:"
+      echo "  make dev        - Start dev mode (backend + frontend)"
+      echo "  make hot-reload - Run backend with hot reload" 
+      echo "  make help       - Show all available commands"
+      echo ""
+      echo "Use the Automations panel (⌘+Shift+A) to access more commands"
+
+# Ports to expose
+ports:
+  - port: 8081
+    name: Backend API
+    description: Go backend API server
+    onOpen: ignore
+  - port: 5173
+    name: Frontend
+    description: React frontend
+    onOpen: open-browser
+
+# VS Code extensions to install
+vscode:
+  extensions:
+    - golang.go
+    - dsznajder.es7-react-js-snippets
+    - dbaeumer.vscode-eslint
+    - esbenp.prettier-vscode
+
+# GitHub pull request configuration
+github:
+  prebuilds:
+    master: true
+    branches: true
+    pullRequests: true
+    pullRequestsFromForks: true
+    addComment: true
+    addBadge: true

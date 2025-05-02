@@ -1,0 +1,65 @@
+# Gitpod automations for the Pool App project
+automations:
+  # Development mode (in-memory)
+  - name: "Start Development Mode"
+    description: "Run the backend and frontend for development with in-memory database"
+    command: "make dev"
+    icon: "play-circle"
+    singleton: true
+
+  # Hot reload backend
+  - name: "Hot Reload Backend"
+    description: "Run the backend with hot reload using Air"
+    command: "make hot-reload"
+    icon: "refresh-cw"
+    singleton: true
+
+  # Frontend development
+  - name: "Start Frontend Only"
+    description: "Run only the frontend development server"
+    command: "make frontend-dev"
+    icon: "layout"
+    singleton: true
+
+  # Build
+  - name: "Build App"
+    description: "Build the backend and frontend for production"
+    command: "make build && make frontend-build"
+    icon: "package"
+    
+  # Run tests
+  - name: "Run Tests"
+    description: "Run all tests for the application"
+    command: "make test"
+    icon: "check-circle"
+    
+  # Build and clean
+  - name: "Clean & Build"
+    description: "Clean artifacts and rebuild"
+    command: "make clean && make build && make frontend-build"
+    icon: "trash-2"
+
+  # Run API server
+  - name: "Run Backend Server"
+    description: "Run only the backend API server"
+    command: "make run"
+    icon: "server"
+    singleton: true
+
+  # Go dependencies
+  - name: "Update Go Dependencies"
+    description: "Update and tidy Go dependencies"
+    command: "make deps"
+    icon: "download"
+    
+  # Frontend dependencies
+  - name: "Update Frontend Dependencies"
+    description: "Install frontend dependencies"
+    command: "make frontend-deps"
+    icon: "package"
+
+  # Help
+  - name: "Show Help"
+    description: "Display help about all available make targets"
+    command: "make help"
+    icon: "help-circle"

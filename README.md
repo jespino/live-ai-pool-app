@@ -24,7 +24,20 @@ The application consists of two main components:
 
 ## Getting Started
 
-### Development Container (Recommended)
+### Development Environment Options
+
+#### Gitpod (Cloud Development)
+
+The quickest way to start developing is using Gitpod:
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/jespino/pool-app)
+
+This will launch a fully configured cloud development environment with all dependencies installed.
+Use the Automations panel (⌘+Shift+A or Ctrl+Shift+A) to access common commands.
+
+See the [Gitpod README](./.gitpod/README.md) for more details.
+
+#### Development Container (Local Development)
 
 The project includes a devcontainer configuration for Visual Studio Code that sets up a complete development environment:
 
