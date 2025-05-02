@@ -1,6 +1,6 @@
 module github.com/jespino/pool-app
 
-go 1.23.0
+go 1.23
 
 require (
 	github.com/felixge/httpsnoop v1.0.4 // indirect
