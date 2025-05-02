@@ -1,65 +1,168 @@
 # Gitpod automations for the Pool App project
+# https://www.gitpod.io/docs/flex/configuration/automations/overview
+
+# Development automations
 automations:
   # Development mode (in-memory)
-  - name: "Start Development Mode"
-    description: "Run the backend and frontend for development with in-memory database"
-    command: "make dev"
-    icon: "play-circle"
+  - id: dev
+    name: Start Development Mode
+    description: Run the backend and frontend for development with in-memory database
+    type: command
+    command: make dev
+    primary: true
+    location:
+      workspace: current
+    when:
+      gp_editor_tabs_tree: true
+      gp_terminal: true
     singleton: true
+    icon: play-circle
+    presentation:
+      group: development
+      color: purple
 
   # Hot reload backend
-  - name: "Hot Reload Backend"
-    description: "Run the backend with hot reload using Air"
-    command: "make hot-reload"
-    icon: "refresh-cw"
+  - id: hot-reload
+    name: Hot Reload Backend
+    description: Run the backend with hot reload using Air
+    type: command
+    command: make hot-reload
+    location:
+      workspace: current
+    when:
+      gp_editor_tabs_tree: true
+      gp_terminal: true
     singleton: true
+    icon: refresh-cw
+    presentation:
+      group: development
+      color: green
 
   # Frontend development
-  - name: "Start Frontend Only"
-    description: "Run only the frontend development server"
-    command: "make frontend-dev"
-    icon: "layout"
+  - id: frontend-dev
+    name: Start Frontend Only
+    description: Run only the frontend development server
+    type: command
+    command: make frontend-dev
+    location:
+      workspace: current
+    when:
+      gp_editor_tabs_tree: true
+      gp_terminal: true
     singleton: true
-
-  # Build
-  - name: "Build App"
-    description: "Build the backend and frontend for production"
-    command: "make build && make frontend-build"
-    icon: "package"
-    
-  # Run tests
-  - name: "Run Tests"
-    description: "Run all tests for the application"
-    command: "make test"
-    icon: "check-circle"
-    
-  # Build and clean
-  - name: "Clean & Build"
-    description: "Clean artifacts and rebuild"
-    command: "make clean && make build && make frontend-build"
-    icon: "trash-2"
+    icon: layout
+    presentation:
+      group: development
+      color: blue
 
   # Run API server
-  - name: "Run Backend Server"
-    description: "Run only the backend API server"
-    command: "make run"
-    icon: "server"
+  - id: backend
+    name: Run Backend Server
+    description: Run only the backend API server
+    type: command
+    command: make run
+    location:
+      workspace: current
+    when:
+      gp_editor_tabs_tree: true
+      gp_terminal: true
     singleton: true
+    icon: server
+    presentation:
+      group: development
+      color: green
 
-  # Go dependencies
-  - name: "Update Go Dependencies"
-    description: "Update and tidy Go dependencies"
-    command: "make deps"
-    icon: "download"
-    
-  # Frontend dependencies
-  - name: "Update Frontend Dependencies"
-    description: "Install frontend dependencies"
-    command: "make frontend-deps"
-    icon: "package"
+  # Build automations
+  - id: build
+    name: Build App
+    description: Build the backend and frontend for production
+    type: command
+    command: make build && make frontend-build
+    location:
+      workspace: current
+    when:
+      gp_editor_tabs_tree: true
+      gp_terminal: true
+    icon: package
+    presentation:
+      group: build
+      color: orange
 
-  # Help
-  - name: "Show Help"
-    description: "Display help about all available make targets"
-    command: "make help"
-    icon: "help-circle"
+  # Clean and build
+  - id: clean-build
+    name: Clean & Build
+    description: Clean artifacts and rebuild
+    type: command
+    command: make clean && make build && make frontend-build
+    location:
+      workspace: current
+    when:
+      gp_editor_tabs_tree: true
+      gp_terminal: true
+    icon: trash-2
+    presentation:
+      group: build
+      color: red
+
+  # Testing automations
+  - id: test
+    name: Run Tests
+    description: Run all tests for the application
+    type: command
+    command: make test
+    location:
+      workspace: current
+    when:
+      gp_editor_tabs_tree: true
+      gp_terminal: true
+    icon: check-circle
+    presentation:
+      group: testing
+      color: green
+
+  # Dependencies automations
+  - id: go-deps
+    name: Update Go Dependencies
+    description: Update and tidy Go dependencies
+    type: command
+    command: make deps
+    location:
+      workspace: current
+    when:
+      gp_editor_tabs_tree: true
+      gp_terminal: true
+    icon: download
+    presentation:
+      group: dependencies
+      color: blue
+
+  - id: frontend-deps
+    name: Update Frontend Dependencies
+    description: Install frontend dependencies
+    type: command
+    command: make frontend-deps
+    location:
+      workspace: current
+    when:
+      gp_editor_tabs_tree: true
+      gp_terminal: true
+    icon: package
+    presentation:
+      group: dependencies
+      color: yellow
+
+  # Utility automations
+  - id: help
+    name: Show Help
+    description: Display help about all available make targets
+    type: command
+    command: make help
+    location:
+      workspace: current
+    when:
+      gp_editor_tabs_tree: true
+      gp_terminal: true
+    icon: help-circle
+    presentation:
+      group: utilities
+      color: gray
