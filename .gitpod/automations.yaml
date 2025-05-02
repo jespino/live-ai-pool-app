@@ -6,17 +6,25 @@ services:
     triggeredBy:
       - postEnvironmentStart
     commands:
-      start: npm run dev
+      start: make frontend-dev
       ready: curl -s http://localhost:5173 > /dev/null
+  backend:
+    name: Backend Server
+    description: Backend server
+    triggeredBy:
+      - postEnvironmentStart
+    commands:
+      start: make run
+      ready: curl -s http://localhost:8081 > /dev/null
 
 # defines automation tasks (optional)
 tasks:
   dependencies:
-    name: Install Dependencies
-    description: Install npm dependencies
+    name: Run tests
+    description: Run tests
     triggeredBy:
-      - postEnvironmentStart
-    command: npm install
+      - manual
+    command: make test
   
   lint:
     name: Lint Code
@@ -25,13 +33,4 @@ tasks:
       - manual
     dependsOn:
       - dependencies
-    command: npm run lint
-  
-  typecheck:
-    name: Type Check
-    description: Run TypeScript type checking
-    triggeredBy:
-      - manual
-    dependsOn:
-      - dependencies
-    command: npm run typecheck
+    command: cd frontend; npm run lint
