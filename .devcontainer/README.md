@@ -4,7 +4,6 @@ This development container provides a complete development environment for the P
 
 - Go 1.20 with standard tools and linting
 - Node.js LTS with NPM
-- PostgreSQL database
 - Docker-in-Docker support
 - VS Code extensions and settings
 
@@ -27,10 +26,13 @@ VS Code will automatically build the development container and connect to it. Th
 
 ## Components
 
-The container consists of:
+The development container includes:
 
-- **devcontainer**: The main development environment with Go, Node.js, and development tools
-- **db**: PostgreSQL database for storing pool data
+- Go development environment with Go 1.20
+- Node.js for frontend development
+- Hot-reloading for development
+- Docker-in-Docker support for container testing
+- Code formatting and linting tools
 
 ## Services and Ports
 
@@ -38,7 +40,6 @@ The container consists of:
 |----------------|------|---------------------------------|
 | Go Backend     | 8081 | Pool API Server                 |
 | React Frontend | 5173 | Pool UI (Vite dev server)       |
-| PostgreSQL     | 5432 | Database                        |
 
 ## Development Workflow
 
@@ -60,18 +61,7 @@ cd /workspace/frontend
 npm run dev
 ```
 
-### Database Access
-
-You can connect to the database using the PostgreSQL extension in VS Code or via the command line:
-
-```bash
-psql -h db -U postgres -d poolapp
-```
-
-The default password is `postgres`.
-
 ## Notes
 
 - Node modules are stored in a volume to improve performance
 - Go modules are cached in a volume
-- The database is persisted in a volume

@@ -30,8 +30,7 @@
         "dsznajder.es7-react-js-snippets",
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
-        "ms-azuretools.vscode-docker",
-        "cweijan.vscode-postgresql-client2"
+        "ms-azuretools.vscode-docker"
       ]
     }
   },
@@ -45,11 +44,10 @@
     "ghcr.io/devcontainers/features/go:1": {
       "version": "1.20"
     },
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
-    "ghcr.io/devcontainers-contrib/features/postgres-client:1": {}
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
   },
 
-  "forwardPorts": [8081, 5173, 5432],
+  "forwardPorts": [8081, 5173],
   
   "postCreateCommand": "go mod download && cd frontend && npm install --legacy-peer-deps",
   
