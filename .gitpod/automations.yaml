@@ -1,168 +1,37 @@
-# Gitpod automations for the Pool App project
-# https://www.gitpod.io/docs/flex/configuration/automations/overview
+# defines automation services (optional)
+services:
+  frontend:
+    name: Frontend Dev Server
+    description: React frontend development server
+    triggeredBy:
+      - postEnvironmentStart
+    commands:
+      start: npm run dev
+      ready: curl -s http://localhost:5173 > /dev/null
 
-# Development automations
-automations:
-  # Development mode (in-memory)
-  - id: dev
-    name: Start Development Mode
-    description: Run the backend and frontend for development with in-memory database
-    type: command
-    command: make dev
-    primary: true
-    location:
-      workspace: current
-    when:
-      gp_editor_tabs_tree: true
-      gp_terminal: true
-    singleton: true
-    icon: play-circle
-    presentation:
-      group: development
-      color: purple
-
-  # Hot reload backend
-  - id: hot-reload
-    name: Hot Reload Backend
-    description: Run the backend with hot reload using Air
-    type: command
-    command: make hot-reload
-    location:
-      workspace: current
-    when:
-      gp_editor_tabs_tree: true
-      gp_terminal: true
-    singleton: true
-    icon: refresh-cw
-    presentation:
-      group: development
-      color: green
-
-  # Frontend development
-  - id: frontend-dev
-    name: Start Frontend Only
-    description: Run only the frontend development server
-    type: command
-    command: make frontend-dev
-    location:
-      workspace: current
-    when:
-      gp_editor_tabs_tree: true
-      gp_terminal: true
-    singleton: true
-    icon: layout
-    presentation:
-      group: development
-      color: blue
-
-  # Run API server
-  - id: backend
-    name: Run Backend Server
-    description: Run only the backend API server
-    type: command
-    command: make run
-    location:
-      workspace: current
-    when:
-      gp_editor_tabs_tree: true
-      gp_terminal: true
-    singleton: true
-    icon: server
-    presentation:
-      group: development
-      color: green
-
-  # Build automations
-  - id: build
-    name: Build App
-    description: Build the backend and frontend for production
-    type: command
-    command: make build && make frontend-build
-    location:
-      workspace: current
-    when:
-      gp_editor_tabs_tree: true
-      gp_terminal: true
-    icon: package
-    presentation:
-      group: build
-      color: orange
-
-  # Clean and build
-  - id: clean-build
-    name: Clean & Build
-    description: Clean artifacts and rebuild
-    type: command
-    command: make clean && make build && make frontend-build
-    location:
-      workspace: current
-    when:
-      gp_editor_tabs_tree: true
-      gp_terminal: true
-    icon: trash-2
-    presentation:
-      group: build
-      color: red
-
-  # Testing automations
-  - id: test
-    name: Run Tests
-    description: Run all tests for the application
-    type: command
-    command: make test
-    location:
-      workspace: current
-    when:
-      gp_editor_tabs_tree: true
-      gp_terminal: true
-    icon: check-circle
-    presentation:
-      group: testing
-      color: green
-
-  # Dependencies automations
-  - id: go-deps
-    name: Update Go Dependencies
-    description: Update and tidy Go dependencies
-    type: command
-    command: make deps
-    location:
-      workspace: current
-    when:
-      gp_editor_tabs_tree: true
-      gp_terminal: true
-    icon: download
-    presentation:
-      group: dependencies
-      color: blue
-
-  - id: frontend-deps
-    name: Update Frontend Dependencies
-    description: Install frontend dependencies
-    type: command
-    command: make frontend-deps
-    location:
-      workspace: current
-    when:
-      gp_editor_tabs_tree: true
-      gp_terminal: true
-    icon: package
-    presentation:
-      group: dependencies
-      color: yellow
-
-  # Utility automations
-  - id: help
-    name: Show Help
-    description: Display help about all available make targets
-    type: command
-    command: make help
-    location:
-      workspace: current
-    when:
-      gp_editor_tabs_tree: true
-      gp_terminal: true
-    icon: help-circle
-    presentation:
-      group: utilities
-      color: gray
+# defines automation tasks (optional)
+tasks:
+  dependencies:
+    name: Install Dependencies
+    description: Install npm dependencies
+    triggeredBy:
+      - postEnvironmentStart
+    command: npm install
+  
+  lint:
+    name: Lint Code
+    description: Run ESLint
+    triggeredBy:
+      - manual
+    dependsOn:
+      - dependencies
+    command: npm run lint
+  
+  typecheck:
+    name: Type Check
+    description: Run TypeScript type checking
+    triggeredBy:
+      - manual
+    dependsOn:
+      - dependencies
+    command: npm run typecheck
