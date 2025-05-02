@@ -1,9 +1,8 @@
+import { Box, Button, Center, Container, Heading, Text, VStack } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
-import { Box, Container, Heading, Text, Button, VStack, Center } from '@chakra-ui/react';
-import { useParams, Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import VotingForm from '../components/VotingForm';
 import { usePool } from '../contexts/PoolContext';
-import { getPool } from '../services/api';
 
 const VotePage: React.FC = () => {
   const { poolId } = useParams<{ poolId: string }>();

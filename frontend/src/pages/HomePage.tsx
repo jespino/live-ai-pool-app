@@ -1,5 +1,5 @@
+import { Box, Button, Container, Flex, Heading } from '@chakra-ui/react';
 import React, { useState } from 'react';
-import { Box, Container, Flex, Heading, Text, Button } from '@chakra-ui/react';
 import PoolQRCode from '../components/PoolQRCode';
 import PoolResults from '../components/PoolResults';
 
