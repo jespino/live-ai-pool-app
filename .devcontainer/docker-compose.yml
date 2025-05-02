@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  devcontainer:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ..:/workspace:cached
+      - go-cache:/go
+      - node-modules:/workspace/frontend/node_modules
+    command: sleep infinity
+    environment:
+      - PORT=8081
+      - DB_TYPE=postgres
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_NAME=poolapp
+      - GO111MODULE=on
+      - GOPATH=/go
+    depends_on:
+      - db
+    networks:
+      - pool-network
+
+  db:
+    image: postgres:15
+    restart: unless-stopped
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=poolapp
+    networks:
+      - pool-network
+
+volumes:
+  postgres-data:
+  go-cache:
+  node-modules:
+
+networks:
+  pool-network:
+    driver: bridge

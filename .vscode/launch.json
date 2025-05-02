@@ -1,0 +1,33 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch Go Backend",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "program": "${workspaceFolder}/cmd/server/main.go",
+      "env": {
+        "PORT": "8081",
+        "DB_TYPE": "memory"
+      }
+    },
+    {
+      "name": "Launch Go Backend (PostgreSQL)",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "program": "${workspaceFolder}/cmd/server/main.go",
+      "env": {
+        "PORT": "8081",
+        "DB_TYPE": "postgres",
+        "DB_HOST": "localhost",
+        "DB_PORT": "5432",
+        "DB_USER": "postgres",
+        "DB_PASSWORD": "postgres",
+        "DB_NAME": "poolapp",
+        "DB_SSLMODE": "disable"
+      }
+    }
+  ]
+}
